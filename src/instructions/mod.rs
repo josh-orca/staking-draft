@@ -5,8 +5,8 @@ use solana_program::program_error::ProgramError;
 
 // Enum representing possible vault instructions
 pub enum VaultInstructions {
-    Deposit,  // Instruction to deposit lamports into the vault
-    Withdraw, // Instruction to withdraw lamports from the vault
+    Deposit,  // Instruction to deposit SPL token into the vault
+    Withdraw, // Instruction to withdraw SPL token from the vault
 }
 
 // Convert a discriminator byte into a 'VaultInstructions' variant

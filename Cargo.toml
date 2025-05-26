@@ -1,5 +1,5 @@
 [package]
-name = "xorca-staking"
+name = "staking-draft"
 version = "0.1.0"
 edition = "2024"
 
@@ -9,3 +9,4 @@ crate-type = ["cdylib", "lib"]
 [dependencies]
 pinocchio = "0.8.4"
 solana-program = "2.2.1"
+spl-token = { version = "8.0.0", features = ["no-entrypoint"] }
