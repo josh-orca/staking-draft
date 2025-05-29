@@ -21,7 +21,7 @@ default_panic_handler!();
 
 pub fn process_instruction(
     program_id: &Pubkey,
-    _: &[AccountInfo],
+    accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
     if program_id != &crate::ID {
@@ -33,16 +33,13 @@ pub fn process_instruction(
     log!("Instruction: {}", instruction.to_string().as_str());
     match &instruction {
         Instruction::InitializeStakingPool => {
-            instructions::initialize_staking_pool::process_instruction()?;
+            instructions::initialize_staking_pool::process_instruction(accounts)?;
         }
         Instruction::Deposit => {
             instructions::deposit::process_instruction()?;
         }
         Instruction::Withdraw {} => {
             instructions::withdraw::process_instruction()?;
-        }
-        _ => {
-            return Err(ErrorCode::UnknownInstructionDiscriminator.into());
         }
     }
     Ok(())
