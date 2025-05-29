@@ -1,23 +1,26 @@
-pub mod deposit; // Deposit handler
-pub mod withdraw; // Withdraw handler
+pub mod deposit;
+pub mod initialize_staking_pool;
+pub mod withdraw;
 
-use solana_program::program_error::ProgramError;
+use borsh::{BorshDeserialize, BorshSerialize};
+use shank::ShankInstruction;
+use strum::{Display, EnumDiscriminants, FromRepr};
 
-// Enum representing possible vault instructions
-pub enum VaultInstructions {
-    Deposit,  // Instruction to deposit SPL token into the vault
-    Withdraw, // Instruction to withdraw SPL token from the vault
+#[derive(
+    Debug, Clone, BorshSerialize, BorshDeserialize, ShankInstruction, Display, EnumDiscriminants,
+)]
+#[strum_discriminants(
+    name(InstructionDiscriminator),
+    derive(BorshSerialize, BorshDeserialize, FromRepr)
+)]
+pub enum Instruction {
+    InitializeStakingPool,
+    Deposit,
+    Withdraw,
 }
 
-// Convert a discriminator byte into a 'VaultInstructions' variant
-impl TryFrom<&u8> for VaultInstructions {
-    type Error = ProgramError;
-
-    fn try_from(discriminator: &u8) -> Result<Self, Self::Error> {
-        match discriminator {
-            0 => Ok(VaultInstructions::Deposit),
-            1 => Ok(VaultInstructions::Withdraw),
-            _ => Err(ProgramError::InvalidInstructionData),
-        }
+impl InstructionDiscriminator {
+    pub fn to_bytes(&self) -> &[u8; 1] {
+        unsafe { &*(self as *const _ as *const [u8; 1]) }
     }
 }
