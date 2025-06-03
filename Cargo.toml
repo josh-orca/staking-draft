@@ -12,7 +12,8 @@ borsh = { version = "^0.10" }
 pinocchio = "0.8.4"
 pinocchio-pubkey = { version = "^0.2" }
 pinocchio-log = { version = "^0.3" }
-solana-program = "2.2.1"
+pinocchio-token = { version = "^0.3.0" }
+solana-program = { version = "2.2.1" }
 shank = { version = "^0.4" }
 spl-token = { version = "8.0.0", features = ["no-entrypoint"] }
 strum = { version = "^0.27", features = ["derive"] }

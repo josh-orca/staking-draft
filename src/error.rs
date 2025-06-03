@@ -19,6 +19,15 @@ pub enum ErrorCode {
 
     #[error("Invalid seeds")]
     InvalidSeeds = 6005, // 0x1775
+
+    #[error("Invalid account address")]
+    IncorrectAccountAddress = 6006, // 0x1776
+
+    #[error("Invalid account data")]
+    InvalidAccountData = 6007, // 0x1777
+
+    #[error("Arithmetic error")]
+    ArithmeticError = 6008, // 0x1778
 }
 
 impl From<ErrorCode> for pinocchio::program_error::ProgramError {

@@ -10,6 +10,22 @@ use pinocchio_log::log;
 
 use crate::error::ErrorCode;
 
+pub trait Key {
+    fn key(&self) -> &Pubkey;
+}
+
+impl Key for Pubkey {
+    fn key(&self) -> &Pubkey {
+        self
+    }
+}
+
+impl Key for AccountInfo {
+    fn key(&self) -> &Pubkey {
+        self.key()
+    }
+}
+
 pub enum AccountRole {
     Signer,
     Writable,
@@ -68,4 +84,15 @@ pub fn assert_account_seeds(
         return Err(ErrorCode::InvalidSeeds.into());
     }
     Ok([bump])
+}
+
+pub fn assert_account_address(account: &impl Key, address: &Pubkey) -> ProgramResult {
+    if account.key() != address {
+        log!(
+            "Account {} has wrong address",
+            account.key().to_base58().as_str()
+        );
+        return Err(ErrorCode::IncorrectAccountAddress.into());
+    }
+    Ok(())
 }

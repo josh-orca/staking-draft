@@ -35,8 +35,8 @@ pub fn process_instruction(
         Instruction::InitializeStakingPool => {
             instructions::initialize_staking_pool::process_instruction(accounts)?;
         }
-        Instruction::Deposit => {
-            instructions::deposit::process_instruction()?;
+        Instruction::Deposit { amount } => {
+            instructions::deposit::process_instruction(accounts, amount)?;
         }
         Instruction::Withdraw {} => {
             instructions::withdraw::process_instruction()?;
