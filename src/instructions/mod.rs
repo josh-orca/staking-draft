@@ -16,7 +16,7 @@ use strum::{Display, EnumDiscriminants, FromRepr};
 pub enum Instruction {
     InitializeStakingPool,
     Deposit { amount: u64 },
-    Withdraw,
+    Withdraw { amount: u64 },
 }
 
 impl InstructionDiscriminator {

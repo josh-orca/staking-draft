@@ -16,8 +16,8 @@ use pinocchio_log::log;
 use pinocchio_pubkey::pubkey;
 use pinocchio_token::{
     ID as SPL_TOKEN_PROGRAM_ID,
-    instructions::{MintTo, Transfer}, // Import MintTo instruction from pinocchio_token
-    state::Mint as SplTokenMint,      // For unpacking token account/mint data
+    instructions::{MintTo, Transfer},
+    state::Mint as SplTokenMint,
     state::TokenAccount as SplTokenAccount,
 };
 
@@ -104,7 +104,7 @@ pub fn process_instruction(accounts: &[AccountInfo], amount: &u64) -> ProgramRes
     };
     transfer_instruction.invoke()?;
     log!(
-        "{} SPL tokens deposited into staking pool successfully!",
+        "{} Orca tokens deposited into staking pool successfully!",
         *amount
     );
 
@@ -140,7 +140,7 @@ pub fn process_instruction(accounts: &[AccountInfo], amount: &u64) -> ProgramRes
     mint_to_instruction.invoke_signed(&[pda_signer_instance])?;
 
     log!(
-        "{} xorca tokens minted to user successfully!",
+        "{} xOrca tokens minted to user successfully!",
         xorca_to_mint
     );
 
